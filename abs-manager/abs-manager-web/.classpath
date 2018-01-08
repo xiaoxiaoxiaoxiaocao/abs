@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-collections-3.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-httpclient.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ezmorph-1.0.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/fastjson-1.2.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/fastjson-1.2.24.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ffmpeg-3.2.1-1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jakarta-oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javacpp-0.8.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javacv-0.8.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jave-1.0.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json-lib-1.1-jdk13.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/morph-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/opencv-platform-3.1.0-1.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/pageTag.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/standard-1.1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/xom-1.0d10.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="src/lib/androidpn-server-0.5.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="src/lib/bcprov-jdk15-140.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-digester-2.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-pool-1.3.jar"/>
+	<classpathentry kind="lib" path="src/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="src/lib/standard.jar"/>
+	<classpathentry kind="lib" path="src/lib/mina-core-2.0.0-RC1.jar"/>
+	<classpathentry kind="lib" path="src/lib/mina-integration-beans-2.0.0-RC1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.ResMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.Res" >
+    <id column="resid" property="resid" jdbcType="VARCHAR" />
+    <result column="resname" property="resname" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="playcnt" property="playcnt" jdbcType="INTEGER" />
+    <result column="stdtime" property="stdtime" jdbcType="VARCHAR" />
+    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="pls_id" property="plsId" jdbcType="INTEGER" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="md5" property="md5" jdbcType="VARCHAR" />
+    <result column="filesize" property="filesize" jdbcType="INTEGER" />
+    <result column="defau" property="defau" jdbcType="TINYINT" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    resid, resname, area, playcnt, stdtime, endtime, priority, pls_id, href, md5, filesize, 
+    defau, text
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.ResExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from res
+    where resid = #{resid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from res
+    where resid = #{resid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.ResExample" >
+    delete from res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.Res" >
+    insert into res (resid, resname, area, 
+      playcnt, stdtime, endtime, 
+      priority, pls_id, href, 
+      md5, filesize, defau, 
+      text)
+    values (#{resid,jdbcType=VARCHAR}, #{resname,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{playcnt,jdbcType=INTEGER}, #{stdtime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{plsId,jdbcType=INTEGER}, #{href,jdbcType=VARCHAR}, 
+      #{md5,jdbcType=VARCHAR}, #{filesize,jdbcType=INTEGER}, #{defau,jdbcType=TINYINT}, 
+      #{text,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.Res" >
+    insert into res
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        resid,
+      </if>
+      <if test="resname != null" >
+        resname,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="playcnt != null" >
+        playcnt,
+      </if>
+      <if test="stdtime != null" >
+        stdtime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="plsId != null" >
+        pls_id,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="filesize != null" >
+        filesize,
+      </if>
+      <if test="defau != null" >
+        defau,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="resname != null" >
+        #{resname,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="playcnt != null" >
+        #{playcnt,jdbcType=INTEGER},
+      </if>
+      <if test="stdtime != null" >
+        #{stdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="plsId != null" >
+        #{plsId,jdbcType=INTEGER},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="defau != null" >
+        #{defau,jdbcType=TINYINT},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.ResExample" resultType="java.lang.Integer" >
+    select count(*) from res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update res
+    <set >
+      <if test="record.resid != null" >
+        resid = #{record.resid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resname != null" >
+        resname = #{record.resname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.playcnt != null" >
+        playcnt = #{record.playcnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.stdtime != null" >
+        stdtime = #{record.stdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plsId != null" >
+        pls_id = #{record.plsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.href != null" >
+        href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.md5 != null" >
+        md5 = #{record.md5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filesize != null" >
+        filesize = #{record.filesize,jdbcType=INTEGER},
+      </if>
+      <if test="record.defau != null" >
+        defau = #{record.defau,jdbcType=TINYINT},
+      </if>
+      <if test="record.text != null" >
+        text = #{record.text,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update res
+    set resid = #{record.resid,jdbcType=VARCHAR},
+      resname = #{record.resname,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      playcnt = #{record.playcnt,jdbcType=INTEGER},
+      stdtime = #{record.stdtime,jdbcType=VARCHAR},
+      endtime = #{record.endtime,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=VARCHAR},
+      pls_id = #{record.plsId,jdbcType=INTEGER},
+      href = #{record.href,jdbcType=VARCHAR},
+      md5 = #{record.md5,jdbcType=VARCHAR},
+      filesize = #{record.filesize,jdbcType=INTEGER},
+      defau = #{record.defau,jdbcType=TINYINT},
+      text = #{record.text,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="abs.pubs.domain.Res" >
+    update res
+    <set >
+      <if test="resname != null" >
+        resname = #{resname,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="playcnt != null" >
+        playcnt = #{playcnt,jdbcType=INTEGER},
+      </if>
+      <if test="stdtime != null" >
+        stdtime = #{stdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="plsId != null" >
+        pls_id = #{plsId,jdbcType=INTEGER},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        filesize = #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="defau != null" >
+        defau = #{defau,jdbcType=TINYINT},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resid = #{resid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="abs.pubs.domain.Res" >
+    update res
+    set resname = #{resname,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      playcnt = #{playcnt,jdbcType=INTEGER},
+      stdtime = #{stdtime,jdbcType=VARCHAR},
+      endtime = #{endtime,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=VARCHAR},
+      pls_id = #{plsId,jdbcType=INTEGER},
+      href = #{href,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR},
+      filesize = #{filesize,jdbcType=INTEGER},
+      defau = #{defau,jdbcType=TINYINT},
+      text = #{text,jdbcType=VARCHAR}
+    where resid = #{resid,jdbcType=VARCHAR}
+  </update>
+</mapper>

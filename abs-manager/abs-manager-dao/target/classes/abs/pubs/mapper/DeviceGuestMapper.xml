@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.DeviceGuestMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.DeviceGuest" >
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="guestId" property="guestid" jdbcType="VARCHAR" />
+    <result column="btn" property="btn" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mac, guestId, btn, time, age, gender
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.DeviceGuestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device_guest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.DeviceGuestExample" >
+    delete from device_guest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.DeviceGuest" >
+    insert into device_guest (mac, guestId, btn, 
+      time, age, gender
+      )
+    values (#{mac,jdbcType=VARCHAR}, #{guestid,jdbcType=VARCHAR}, #{btn,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.DeviceGuest" >
+    insert into device_guest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="guestid != null" >
+        guestId,
+      </if>
+      <if test="btn != null" >
+        btn,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="guestid != null" >
+        #{guestid,jdbcType=VARCHAR},
+      </if>
+      <if test="btn != null" >
+        #{btn,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.DeviceGuestExample" resultType="java.lang.Integer" >
+    select count(*) from device_guest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_guest
+    <set >
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guestid != null" >
+        guestId = #{record.guestid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btn != null" >
+        btn = #{record.btn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_guest
+    set mac = #{record.mac,jdbcType=VARCHAR},
+      guestId = #{record.guestid,jdbcType=VARCHAR},
+      btn = #{record.btn,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      age = #{record.age,jdbcType=INTEGER},
+      gender = #{record.gender,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

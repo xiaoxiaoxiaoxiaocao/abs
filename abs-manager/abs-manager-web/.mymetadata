@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="abs-manager-web"
+  id="myeclipse.1504163729576"
+  context-root="/abs-manager-web"
+  j2ee-spec="1.7"
+  archive="abs-manager-web.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

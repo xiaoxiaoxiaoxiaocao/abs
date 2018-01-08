@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+	
+	<!-- 开启shiro注解支持 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"></property>
+	</bean>
+	
+	
+	<!-- 配置shiro安全框架处理类 
+		* 1)注入安全管理器，之后认证使用
+			securityManager
+		* 2)通用配置 
+			loginUrl ：指定登录页面
+			successUrl ：指定成功后跳转的页面
+			unauthorizedUrl ：指定没有认证通过显示的页面
+	-->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 安全管理器 -->
+		<property name="securityManager" ref="securityManager"></property>
+		
+		<property name="loginUrl" value="/login.jsp"></property>
+		<property name="successUrl" value="/WEB-INF/jsp/index.jsp"></property>
+		<property name="unauthorizedUrl" value="/WEB-INF/jsp/login.jsp"></property>		
+		<!-- 配置不同的路径的认证方式 , filterChainDefinitions : 认证过滤器详情定义
+			* 详情定义格式：路径 = 认证方式
+			* 例如：
+				/images/** = anon , /images目录下的所有资源将采用“匿名”方式
+			* 常见认证方式：
+				anon 匿名、logout 退出、authz 认证
+		-->
+		<property name="filterChainDefinitions">
+			<value>
+			/** =anon
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 配置安全管理器 
+		* 需要注入自定义realm，从而连接数据库进行处理
+	-->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="customRealm"></property>
+	</bean>
+	 
+	<!-- 配置自定义realm -->
+	<bean id="customRealm" class="abs.pubs.manager.auth.shiro.CustomRealm">
+		<!-- <property name="credentialsMatcher" ref="credentialsMatcher"></property> -->
+	</bean>
+	
+	<!-- 凭证匹配器  -->
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		
+	</bean>
+	
+
+</beans>

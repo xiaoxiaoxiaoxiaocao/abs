@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.ProPackageMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.ProPackage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="states" property="states" jdbcType="INTEGER" />
+    <result column="pkg_type" property="pkgType" jdbcType="INTEGER" />
+    <result column="pkg_name" property="pkgName" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="INTEGER" />
+    <result column="updttime" property="updttime" jdbcType="TIMESTAMP" />
+    <result column="ptaskId" property="ptaskid" jdbcType="VARCHAR" />
+    <result column="rtaskId" property="rtaskid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, states, pkg_type, pkg_name, operator, updttime, ptaskId, rtaskId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.ProPackageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pro_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pro_package
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pro_package
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.ProPackageExample" >
+    delete from pro_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.ProPackage" >
+    insert into pro_package (id, states, pkg_type, 
+      pkg_name, operator, updttime, 
+      ptaskId, rtaskId)
+    values (#{id,jdbcType=INTEGER}, #{states,jdbcType=INTEGER}, #{pkgType,jdbcType=INTEGER}, 
+      #{pkgName,jdbcType=VARCHAR}, #{operator,jdbcType=INTEGER}, #{updttime,jdbcType=TIMESTAMP}, 
+      #{ptaskid,jdbcType=VARCHAR}, #{rtaskid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.ProPackage" >
+    insert into pro_package
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="states != null" >
+        states,
+      </if>
+      <if test="pkgType != null" >
+        pkg_type,
+      </if>
+      <if test="pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="updttime != null" >
+        updttime,
+      </if>
+      <if test="ptaskid != null" >
+        ptaskId,
+      </if>
+      <if test="rtaskid != null" >
+        rtaskId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="states != null" >
+        #{states,jdbcType=INTEGER},
+      </if>
+      <if test="pkgType != null" >
+        #{pkgType,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="updttime != null" >
+        #{updttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptaskid != null" >
+        #{ptaskid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtaskid != null" >
+        #{rtaskid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.ProPackageExample" resultType="java.lang.Integer" >
+    select count(*) from pro_package
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pro_package
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.states != null" >
+        states = #{record.states,jdbcType=INTEGER},
+      </if>
+      <if test="record.pkgType != null" >
+        pkg_type = #{record.pkgType,jdbcType=INTEGER},
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=INTEGER},
+      </if>
+      <if test="record.updttime != null" >
+        updttime = #{record.updttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ptaskid != null" >
+        ptaskId = #{record.ptaskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtaskid != null" >
+        rtaskId = #{record.rtaskid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pro_package
+    set id = #{record.id,jdbcType=INTEGER},
+      states = #{record.states,jdbcType=INTEGER},
+      pkg_type = #{record.pkgType,jdbcType=INTEGER},
+      pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=INTEGER},
+      updttime = #{record.updttime,jdbcType=TIMESTAMP},
+      ptaskId = #{record.ptaskid,jdbcType=VARCHAR},
+      rtaskId = #{record.rtaskid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="abs.pubs.domain.ProPackage" >
+    update pro_package
+    <set >
+      <if test="states != null" >
+        states = #{states,jdbcType=INTEGER},
+      </if>
+      <if test="pkgType != null" >
+        pkg_type = #{pkgType,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        pkg_name = #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="updttime != null" >
+        updttime = #{updttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ptaskid != null" >
+        ptaskId = #{ptaskid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtaskid != null" >
+        rtaskId = #{rtaskid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="abs.pubs.domain.ProPackage" >
+    update pro_package
+    set states = #{states,jdbcType=INTEGER},
+      pkg_type = #{pkgType,jdbcType=INTEGER},
+      pkg_name = #{pkgName,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=INTEGER},
+      updttime = #{updttime,jdbcType=TIMESTAMP},
+      ptaskId = #{ptaskid,jdbcType=VARCHAR},
+      rtaskId = #{rtaskid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <update id="updateIssue" parameterType="java.lang.Integer">
+  	update pro_package set states = 1 where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

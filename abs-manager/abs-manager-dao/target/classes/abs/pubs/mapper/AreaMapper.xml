@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.AreaMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.Area" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="areaType" property="areatype" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="INTEGER" />
+    <result column="y" property="y" jdbcType="INTEGER" />
+    <result column="width" property="width" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="bgimg" property="bgimg" jdbcType="VARCHAR" />
+    <result column="bgcolor" property="bgcolor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, areaType, x, y, width, height, model_id, bgimg, bgcolor
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.AreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from area
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from area
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.AreaExample" >
+    delete from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.Area" >
+    insert into area (id, areaType, x, 
+      y, width, height, model_id, 
+      bgimg, bgcolor)
+    values (#{id,jdbcType=INTEGER}, #{areatype,jdbcType=VARCHAR}, #{x,jdbcType=INTEGER}, 
+      #{y,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{modelId,jdbcType=VARCHAR}, 
+      #{bgimg,jdbcType=VARCHAR}, #{bgcolor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.Area" useGeneratedKeys="true" keyProperty="id">
+    insert into area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="areatype != null" >
+        areaType,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="bgimg != null" >
+        bgimg,
+      </if>
+      <if test="bgcolor != null" >
+        bgcolor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="areatype != null" >
+        #{areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=INTEGER},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null" >
+        #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bgcolor != null" >
+        #{bgcolor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.AreaExample" resultType="java.lang.Integer" >
+    select count(*) from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update area
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.areatype != null" >
+        areaType = #{record.areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.x != null" >
+        x = #{record.x,jdbcType=INTEGER},
+      </if>
+      <if test="record.y != null" >
+        y = #{record.y,jdbcType=INTEGER},
+      </if>
+      <if test="record.width != null" >
+        width = #{record.width,jdbcType=INTEGER},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=INTEGER},
+      </if>
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgimg != null" >
+        bgimg = #{record.bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bgcolor != null" >
+        bgcolor = #{record.bgcolor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update area
+    set id = #{record.id,jdbcType=INTEGER},
+      areaType = #{record.areatype,jdbcType=VARCHAR},
+      x = #{record.x,jdbcType=INTEGER},
+      y = #{record.y,jdbcType=INTEGER},
+      width = #{record.width,jdbcType=INTEGER},
+      height = #{record.height,jdbcType=INTEGER},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      bgimg = #{record.bgimg,jdbcType=VARCHAR},
+      bgcolor = #{record.bgcolor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="abs.pubs.domain.Area" >
+    update area
+    <set >
+      <if test="areatype != null" >
+        areaType = #{areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=INTEGER},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null" >
+        bgimg = #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bgcolor != null" >
+        bgcolor = #{bgcolor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="abs.pubs.domain.Area" >
+    update area
+    set areaType = #{areatype,jdbcType=VARCHAR},
+      x = #{x,jdbcType=INTEGER},
+      y = #{y,jdbcType=INTEGER},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      model_id = #{modelId,jdbcType=VARCHAR},
+      bgimg = #{bgimg,jdbcType=VARCHAR},
+      bgcolor = #{bgcolor,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

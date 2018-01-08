@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.Device" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="deviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="outputResolution" property="outputresolution" jdbcType="VARCHAR" />
+    <result column="firmwareVersion" property="firmwareversion" jdbcType="VARCHAR" />
+    <result column="appVersion" property="appversion" jdbcType="VARCHAR" />
+    <result column="subnetMask" property="subnetmask" jdbcType="VARCHAR" />
+    <result column="defaultGateway" property="defaultgateway" jdbcType="VARCHAR" />
+    <result column="hardDiskFreeSpace" property="harddiskfreespace" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="systemType" property="systemtype" jdbcType="VARCHAR" />
+    <result column="totalPhysicalMemory" property="totalphysicalmemory" jdbcType="VARCHAR" />
+    <result column="LoginUserName" property="loginusername" jdbcType="VARCHAR" />
+    <result column="cpuID" property="cpuid" jdbcType="VARCHAR" />
+    <result column="diskID" property="diskid" jdbcType="VARCHAR" />
+    <result column="grouping" property="grouping" jdbcType="INTEGER" />
+    <result column="devicetypeId" property="devicetypeid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deviceName, mac, ip, status, outputResolution, firmwareVersion, appVersion, subnetMask, 
+    defaultGateway, hardDiskFreeSpace, updateTime, systemType, totalPhysicalMemory, LoginUserName, 
+    cpuID, diskID, grouping, devicetypeId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.DeviceExample" >
+    delete from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.Device" >
+    insert into device (id, deviceName, mac, 
+      ip, status, outputResolution, 
+      firmwareVersion, appVersion, subnetMask, 
+      defaultGateway, hardDiskFreeSpace, updateTime, 
+      systemType, totalPhysicalMemory, LoginUserName, 
+      cpuID, diskID, grouping, 
+      devicetypeId)
+    values (#{id,jdbcType=INTEGER}, #{devicename,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{outputresolution,jdbcType=VARCHAR}, 
+      #{firmwareversion,jdbcType=VARCHAR}, #{appversion,jdbcType=VARCHAR}, #{subnetmask,jdbcType=VARCHAR}, 
+      #{defaultgateway,jdbcType=VARCHAR}, #{harddiskfreespace,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{systemtype,jdbcType=VARCHAR}, #{totalphysicalmemory,jdbcType=VARCHAR}, #{loginusername,jdbcType=VARCHAR}, 
+      #{cpuid,jdbcType=VARCHAR}, #{diskid,jdbcType=VARCHAR}, #{grouping,jdbcType=INTEGER}, 
+      #{devicetypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="outputresolution != null" >
+        outputResolution,
+      </if>
+      <if test="firmwareversion != null" >
+        firmwareVersion,
+      </if>
+      <if test="appversion != null" >
+        appVersion,
+      </if>
+      <if test="subnetmask != null" >
+        subnetMask,
+      </if>
+      <if test="defaultgateway != null" >
+        defaultGateway,
+      </if>
+      <if test="harddiskfreespace != null" >
+        hardDiskFreeSpace,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="systemtype != null" >
+        systemType,
+      </if>
+      <if test="totalphysicalmemory != null" >
+        totalPhysicalMemory,
+      </if>
+      <if test="loginusername != null" >
+        LoginUserName,
+      </if>
+      <if test="cpuid != null" >
+        cpuID,
+      </if>
+      <if test="diskid != null" >
+        diskID,
+      </if>
+      <if test="grouping != null" >
+        grouping,
+      </if>
+      <if test="devicetypeid != null" >
+        devicetypeId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="outputresolution != null" >
+        #{outputresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="firmwareversion != null" >
+        #{firmwareversion,jdbcType=VARCHAR},
+      </if>
+      <if test="appversion != null" >
+        #{appversion,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultgateway != null" >
+        #{defaultgateway,jdbcType=VARCHAR},
+      </if>
+      <if test="harddiskfreespace != null" >
+        #{harddiskfreespace,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemtype != null" >
+        #{systemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="totalphysicalmemory != null" >
+        #{totalphysicalmemory,jdbcType=VARCHAR},
+      </if>
+      <if test="loginusername != null" >
+        #{loginusername,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuid != null" >
+        #{cpuid,jdbcType=VARCHAR},
+      </if>
+      <if test="diskid != null" >
+        #{diskid,jdbcType=VARCHAR},
+      </if>
+      <if test="grouping != null" >
+        #{grouping,jdbcType=INTEGER},
+      </if>
+      <if test="devicetypeid != null" >
+        #{devicetypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outputresolution != null" >
+        outputResolution = #{record.outputresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmwareversion != null" >
+        firmwareVersion = #{record.firmwareversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appversion != null" >
+        appVersion = #{record.appversion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subnetmask != null" >
+        subnetMask = #{record.subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultgateway != null" >
+        defaultGateway = #{record.defaultgateway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.harddiskfreespace != null" >
+        hardDiskFreeSpace = #{record.harddiskfreespace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.systemtype != null" >
+        systemType = #{record.systemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalphysicalmemory != null" >
+        totalPhysicalMemory = #{record.totalphysicalmemory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginusername != null" >
+        LoginUserName = #{record.loginusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuid != null" >
+        cpuID = #{record.cpuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diskid != null" >
+        diskID = #{record.diskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grouping != null" >
+        grouping = #{record.grouping,jdbcType=INTEGER},
+      </if>
+      <if test="record.devicetypeid != null" >
+        devicetypeId = #{record.devicetypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      outputResolution = #{record.outputresolution,jdbcType=VARCHAR},
+      firmwareVersion = #{record.firmwareversion,jdbcType=VARCHAR},
+      appVersion = #{record.appversion,jdbcType=VARCHAR},
+      subnetMask = #{record.subnetmask,jdbcType=VARCHAR},
+      defaultGateway = #{record.defaultgateway,jdbcType=VARCHAR},
+      hardDiskFreeSpace = #{record.harddiskfreespace,jdbcType=VARCHAR},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      systemType = #{record.systemtype,jdbcType=VARCHAR},
+      totalPhysicalMemory = #{record.totalphysicalmemory,jdbcType=VARCHAR},
+      LoginUserName = #{record.loginusername,jdbcType=VARCHAR},
+      cpuID = #{record.cpuid,jdbcType=VARCHAR},
+      diskID = #{record.diskid,jdbcType=VARCHAR},
+      grouping = #{record.grouping,jdbcType=INTEGER},
+      devicetypeId = #{record.devicetypeid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="abs.pubs.domain.Device" >
+    update device
+    <set >
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="outputresolution != null" >
+        outputResolution = #{outputresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="firmwareversion != null" >
+        firmwareVersion = #{firmwareversion,jdbcType=VARCHAR},
+      </if>
+      <if test="appversion != null" >
+        appVersion = #{appversion,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        subnetMask = #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultgateway != null" >
+        defaultGateway = #{defaultgateway,jdbcType=VARCHAR},
+      </if>
+      <if test="harddiskfreespace != null" >
+        hardDiskFreeSpace = #{harddiskfreespace,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemtype != null" >
+        systemType = #{systemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="totalphysicalmemory != null" >
+        totalPhysicalMemory = #{totalphysicalmemory,jdbcType=VARCHAR},
+      </if>
+      <if test="loginusername != null" >
+        LoginUserName = #{loginusername,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuid != null" >
+        cpuID = #{cpuid,jdbcType=VARCHAR},
+      </if>
+      <if test="diskid != null" >
+        diskID = #{diskid,jdbcType=VARCHAR},
+      </if>
+      <if test="grouping != null" >
+        grouping = #{grouping,jdbcType=INTEGER},
+      </if>
+      <if test="devicetypeid != null" >
+        devicetypeId = #{devicetypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="abs.pubs.domain.Device" >
+    update device
+    set deviceName = #{devicename,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      outputResolution = #{outputresolution,jdbcType=VARCHAR},
+      firmwareVersion = #{firmwareversion,jdbcType=VARCHAR},
+      appVersion = #{appversion,jdbcType=VARCHAR},
+      subnetMask = #{subnetmask,jdbcType=VARCHAR},
+      defaultGateway = #{defaultgateway,jdbcType=VARCHAR},
+      hardDiskFreeSpace = #{harddiskfreespace,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      systemType = #{systemtype,jdbcType=VARCHAR},
+      totalPhysicalMemory = #{totalphysicalmemory,jdbcType=VARCHAR},
+      LoginUserName = #{loginusername,jdbcType=VARCHAR},
+      cpuID = #{cpuid,jdbcType=VARCHAR},
+      diskID = #{diskid,jdbcType=VARCHAR},
+      grouping = #{grouping,jdbcType=INTEGER},
+      devicetypeId = #{devicetypeid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByGroupId" parameterType="java.lang.Integer" resultType="abs.pubs.domain.Device">
+  select * from device where  grouping = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAllValidMac" resultType="java.lang.String">
+  	SELECT mac FROM `device` where grouping is not null;
+  </select>
+  <select id="findIDByMac" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select id
+    from device
+    where device.mac= #{_mac}
+  </select>
+  <select id="selectByMac" resultType="abs.pubs.domain.Device" parameterType="java.lang.String">
+  select * from device where device.mac= #{mac}
+  </select>
+  <select id="selectNameByMac" resultType="java.lang.String" parameterType="java.lang.String">
+  select deviceName from device where device.mac= #{mac}
+  </select>
+   <select id="selectMacById" parameterType="java.lang.Integer" resultType="java.lang.String">
+  	select mac from device where id = #{id}
+  </select>
+  <select id="selectListByIds" resultType="abs.pubs.domain.Device">
+  		select * from `device`
+  		<where>
+  			<foreach collection="list" item="device" open=" id in (" separator=","  close=")" >
+  				#{device}
+  			</foreach>
+  		</where>
+  </select>
+</mapper>

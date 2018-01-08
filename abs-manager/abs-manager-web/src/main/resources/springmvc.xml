@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	<!-- 扫描 把controller交给spring管理 -->
+	<context:component-scan base-package="abs.pubs.manager.controller"></context:component-scan>
+
+	<!--注解驱动 -->
+	<mvc:annotation-driven />
+	<!-- 放行静态资源 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="abs.pubs.fileupload.UploadCommonsMultipartResolver.UploadCommonsMultipartResolver">
+		<property name="maxUploadSize" value="524288000"></property>
+	   <property name="defaultEncoding" value="utf-8" />
+	</bean>
+	<!-- 统一异常处理 -->
+	<bean class="abs.pubs.utils.CustomGlobalExceptionResolver"></bean>
+	 <!-- 使用fastJson来支持JSON数据格式 -->  
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>text/html;charset=UTF-8</value>  
+                        <value>application/json</value>  
+                    </list>  
+                </property>  
+                <property name="features">  
+                    <list>  
+                        <value>WriteMapNullValue</value>  
+                        <value>QuoteFieldNames</value>  
+                    </list>  
+                </property>  
+      </bean>
+      
+		<!-- 消息转换器,解决responseBody返回中文乱码问题 -->
+      <!-- <mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->  
+    
+</beans>

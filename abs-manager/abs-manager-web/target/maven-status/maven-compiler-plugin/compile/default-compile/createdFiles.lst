@@ -1,0 +1,16 @@
+abs\pubs\manager\controller\ArrangeController.class
+abs\pubs\manager\controller\MinaController.class
+abs\pubs\manager\auth\shiro\CustomRealm.class
+abs\pubs\manager\controller\HttpController.class
+abs\pubs\manager\controller\LoginController.class
+abs\pubs\manager\controller\FaceController.class
+abs\pubs\manager\controller\UploadListener.class
+abs\pubs\manager\controller\UIController.class
+abs\pubs\manager\controller\SocketServiceLoader.class
+abs\pubs\fileupload\UploadCommonsMultipartResolver\UploadCommonsMultipartResolver.class
+abs\pubs\manager\mina\handler\TrapHandler.class
+abs\pubs\manager\controller\PictureController.class
+abs\pubs\manager\controller\LedController.class
+abs\pubs\manager\controller\DeviceController.class
+abs\pubs\manager\controller\UserController.class
+abs\pubs\manager\controller\StatisticsController.class

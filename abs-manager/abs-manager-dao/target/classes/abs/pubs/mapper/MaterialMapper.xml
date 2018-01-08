@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="abs.pubs.mapper.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="abs.pubs.domain.Material" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="addUserId" property="adduserid" jdbcType="INTEGER" />
+    <result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="checkUserId" property="checkuserid" jdbcType="INTEGER" />
+    <result column="checkTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="SMALLINT" />
+    <result column="timeSize" property="timesize" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, type, size, addUserId, addTime, checkUserId, checkTime, state, timeSize
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="abs.pubs.domain.MaterialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from material
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from material
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="abs.pubs.domain.MaterialExample" >
+    delete from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="abs.pubs.domain.Material" >
+    insert into material (id, name, type, 
+      size, addUserId, addTime, 
+      checkUserId, checkTime, state, 
+      timeSize)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{size,jdbcType=INTEGER}, #{adduserid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{checkuserid,jdbcType=INTEGER}, #{checktime,jdbcType=TIMESTAMP}, #{state,jdbcType=SMALLINT}, 
+      #{timesize,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="abs.pubs.domain.Material" >
+    insert into material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="adduserid != null" >
+        addUserId,
+      </if>
+      <if test="addtime != null" >
+        addTime,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="checktime != null" >
+        checkTime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="timesize != null" >
+        timeSize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="adduserid != null" >
+        #{adduserid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="timesize != null" >
+        #{timesize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="abs.pubs.domain.MaterialExample" resultType="java.lang.Integer" >
+    select count(*) from material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update material
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=INTEGER},
+      </if>
+      <if test="record.adduserid != null" >
+        addUserId = #{record.adduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        addTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkuserid != null" >
+        checkUserId = #{record.checkuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checktime != null" >
+        checkTime = #{record.checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.timesize != null" >
+        timeSize = #{record.timesize,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update material
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      size = #{record.size,jdbcType=INTEGER},
+      addUserId = #{record.adduserid,jdbcType=INTEGER},
+      addTime = #{record.addtime,jdbcType=TIMESTAMP},
+      checkUserId = #{record.checkuserid,jdbcType=INTEGER},
+      checkTime = #{record.checktime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=SMALLINT},
+      timeSize = #{record.timesize,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="abs.pubs.domain.Material" >
+    update material
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="adduserid != null" >
+        addUserId = #{adduserid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        checkTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="timesize != null" >
+        timeSize = #{timesize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="abs.pubs.domain.Material" >
+    update material
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      size = #{size,jdbcType=INTEGER},
+      addUserId = #{adduserid,jdbcType=INTEGER},
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      checkUserId = #{checkuserid,jdbcType=INTEGER},
+      checkTime = #{checktime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=SMALLINT},
+      timeSize = #{timesize,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findSumByType" resultType="java.util.HashMap">
+  	SELECT b.dict_item_name 类型,COUNT(1) 总数 FROM `material` m,base_dict b where m.type = b.dict_type_code and b.dict_item_code=002 GROUP BY type;
+  </select>
+  
+  <select id="findStatisticsMaterial" resultType="abs.pubs.domain.MaterialResult">
+  SELECT b.dict_item_name type,COUNT(*) num FROM `material` m,base_dict b where m.type=b.dict_type_code and b.dict_item_code='002' GROUP BY m.type;
+  <!-- SELECT b.dict_item_name type,COUNT(*) num FROM `material` m,base_dict b where m.type=b.dict_type_code and b.dict_type_name='素材类型' GROUP BY m.type; -->
+  </select>
+  
+  <select id="findStatisticsArea" resultType="abs.pubs.domain.MaterialResult">
+  	SELECT c.`name` type,COUNT(1) num FROM `device` d,devicecat c WHERE d.grouping = c.id GROUP BY d.grouping;
+  </select>
+  
+ 
+  
+  
+</mapper>
